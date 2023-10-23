@@ -3,6 +3,11 @@ name: Tag AWS Accounts
 on:
   workflow_dispatch:
     inputs:
+
+      Resource_id:             #Mandatory parameter : Resourceid of the Account created
+        required: true
+      
+      
       tagAccountRouteDomain:
         type: choice
         description: Select  ACCOUNT_ROUTE_DOMAIN_TAG
@@ -11,9 +16,16 @@ on:
           - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharednonprod"
           - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharedprod"
         
-      Resource_id:             #Mandatory parameter : Resourceid of the Account created
-        required: true
+
+      tagRouteDomain:
+        type: choice
+        description: Select  route_domain_tag
+        options:  
         
+          - "Key=route-domain,Value=aws3sharednonprod"
+          - "Key=route-domain,Value=aws3sharedprod"
+
+          
 permissions:
   id-token: write   # This is required for requesting the JWT
   contents: read    # This is required for actions/checkout
@@ -37,4 +49,4 @@ jobs:
       - name: Execute Tagging cli
         run: |
           aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagAccountRouteDomain }}
-           
+          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }           
