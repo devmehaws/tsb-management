@@ -34,5 +34,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Execute Tagging cli
         run: |
-          # aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagEnvironment }}
-            aws sts get-caller-identity
+          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagEnvironment }}
+           
