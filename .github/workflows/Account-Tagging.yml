@@ -29,7 +29,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::042374093782:role/GitHubAction-AssumeRoleWithAction
+          role-to-assume: arn:aws:iam::207644714085:role/GitHubAction-AssumeRoleWithAction
           role-session-name: GitHubAction-AssumeRoleWithAction
           aws-region: ${{ env.AWS_REGION }}
       - name: Execute Tagging cli
