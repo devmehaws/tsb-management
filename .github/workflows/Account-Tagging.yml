@@ -1,0 +1,37 @@
+name: Tag AWS Accounts 
+
+on:
+  workflow_dispatch:
+    inputs:
+      tagEnvironment:
+        type: choice
+        description: Select the Environment Tag
+        options:  #Change to provide inputs for Account Tags
+        - "Key=environment,Value=nonprod"
+        - "Key=environment,Value=prod"
+      Resource_id:             #Mandatory parameter : Resourceid of the Account created
+        required: true
+        
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+        
+env: 
+  AWS_REGION : us-east-1 #Change to reflect your Region
+
+
+jobs:
+  AssumeRoleAndApplyTags:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::042374093782:role/GitHubAction-AssumeRoleWithAction
+          role-session-name: GitHubAction-AssumeRoleWithAction
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Execute Tagging cli
+        run: |
+          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagEnvironment }}
