@@ -49,7 +49,7 @@ jobs:
       - name: Execute Tagging cli
         run: |
           aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagAccountRouteDomain }}
-          # aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }           
-      - name: Execute Tagging cli 2
-        run: |
-          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }
+          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }}         
+      # - name: Execute Tagging cli 2
+      #   run: |
+      #     aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }}
