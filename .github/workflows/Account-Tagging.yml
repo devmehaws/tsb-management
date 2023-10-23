@@ -3,7 +3,7 @@ name: Tag AWS Accounts
 on:
   workflow_dispatch:
     inputs:
-      tag_ACCOUNT_ROUTE_DOMAIN_TAG:
+      tagAccountRouteDomain:
         type: choice
         description: Select  ACCOUNT_ROUTE_DOMAIN_TAG
         options:  #Change to provide inputs for Account Tag
@@ -36,5 +36,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Execute Tagging cli
         run: |
-          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagEnvironment }}
+          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagAccountRouteDomain }}
            
