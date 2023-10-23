@@ -8,13 +8,13 @@ on:
         required: true
       
       
-      tagAccountRouteDomain:
-        type: choice
-        description: Select  ACCOUNT_ROUTE_DOMAIN_TAG
-        options:  #Change to provide inputs for Account Tag
+      # tagAccountRouteDomain:
+      #   type: choice
+      #   description: Select  ACCOUNT_ROUTE_DOMAIN_TAG
+      #   options:  #Change to provide inputs for Account Tag
         
-          - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharednonprod"
-          - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharedprod"
+      #     - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharednonprod"
+      #     - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharedprod"
         
 
       tagRouteDomain:
@@ -24,6 +24,8 @@ on:
         
           - "Key=route-domain,Value=aws3sharednonprod"
           - "Key=route-domain,Value=aws3sharedprod"
+          - "Key=route-domain,Value=aws3nonprod"
+          - "Key=route-domain,Value=aws3prod"
 
           
 permissions:
@@ -48,8 +50,6 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Execute Tagging cli
         run: |
-          aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagAccountRouteDomain }}
+          # aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagAccountRouteDomain }}
           aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }}         
-      # - name: Execute Tagging cli 2
-      #   run: |
-      #     aws organizations tag-resource --resource-id ${{ github.event.inputs.Resource_id }} --tags ${{ github.event.inputs.tagRouteDomain }}
+      # - 
