@@ -3,12 +3,14 @@ name: Tag AWS Accounts
 on:
   workflow_dispatch:
     inputs:
-      tagEnvironment:
+      tag_ACCOUNT_ROUTE_DOMAIN_TAG:
         type: choice
-        description: Select the Environment Tag
-        options:  #Change to provide inputs for Account Tags
-        - "Key=environment,Value=nonprod"
-        - "Key=environment,Value=prod"
+        description: Select  ACCOUNT_ROUTE_DOMAIN_TAG
+        options:  #Change to provide inputs for Account Tag
+        
+          - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharednonprod"
+          - "Key=ACCOUNT_ROUTE_DOMAIN_TAG,Value=sharedprod"
+        
       Resource_id:             #Mandatory parameter : Resourceid of the Account created
         required: true
         
